@@ -2,7 +2,6 @@ from PyQt5 import QtWidgets, uic
 from PyQt5.QtWidgets import *
 import sys
 import psycopg2
-import threading
 
 class Ui(QMainWindow):
     def __init__(self):
@@ -14,12 +13,7 @@ class Ui(QMainWindow):
         self.currentTable = ""
         self.initUi()
         self.setEvents()
-        self.threading()
         self.show()
-    
-    def threading(self):
-        print("sim")
-        threading.Thread(target=self.conn).start()
 
     def initUi(self):
         self.tableWidget = self.findChild(QTableWidget, "tableWidget")
