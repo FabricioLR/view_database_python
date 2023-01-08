@@ -7,79 +7,39 @@
     <x>0</x>
     <y>0</y>
     <width>717</width>
-    <height>456</height>
+    <height>474</height>
    </rect>
+  </property>
+  <property name="cursor">
+   <cursorShape>ArrowCursor</cursorShape>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QLineEdit" name="database">
-    <property name="enabled">
-     <bool>true</bool>
-    </property>
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>40</y>
-      <width>111</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="host">
-    <property name="geometry">
-     <rect>
-      <x>160</x>
-      <y>40</y>
-      <width>113</width>
-      <height>21</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="username">
-    <property name="geometry">
-     <rect>
-      <x>310</x>
-      <y>40</y>
-      <width>113</width>
-      <height>20</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="password">
-    <property name="geometry">
-     <rect>
-      <x>460</x>
-      <y>40</y>
-      <width>113</width>
-      <height>20</height>
-     </rect>
-    </property>
-   </widget>
    <widget class="QPushButton" name="connect">
     <property name="geometry">
      <rect>
-      <x>630</x>
-      <y>20</y>
-      <width>75</width>
+      <x>620</x>
+      <y>10</y>
+      <width>81</width>
       <height>31</height>
      </rect>
     </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
     <property name="text">
-     <string>PushButton</string>
+     <string>Connect</string>
     </property>
    </widget>
    <widget class="QTableWidget" name="tableWidget">
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>110</y>
+      <y>90</y>
       <width>691</width>
-      <height>321</height>
+      <height>371</height>
      </rect>
     </property>
    </widget>
@@ -87,10 +47,13 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>70</y>
+      <y>60</y>
       <width>111</width>
       <height>21</height>
      </rect>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
     </property>
    </widget>
    <widget class="QLabel" name="label">
@@ -98,51 +61,66 @@
      <rect>
       <x>10</x>
       <y>10</y>
-      <width>101</width>
-      <height>21</height>
+      <width>31</width>
+      <height>31</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
     <property name="text">
-     <string>database</string>
+     <string>url</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_2">
+   <widget class="QLineEdit" name="url">
     <property name="geometry">
      <rect>
-      <x>160</x>
+      <x>40</x>
       <y>10</y>
-      <width>101</width>
-      <height>21</height>
+      <width>211</width>
+      <height>31</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
+    <property name="toolTip">
+     <string/>
+    </property>
+    <property name="whatsThis">
+     <string/>
+    </property>
+    <property name="accessibleName">
+     <string notr="true"/>
+    </property>
     <property name="text">
-     <string>host</string>
+     <string/>
     </property>
    </widget>
-   <widget class="QLabel" name="label_3">
+   <widget class="QComboBox" name="urls">
     <property name="geometry">
      <rect>
-      <x>310</x>
+      <x>270</x>
       <y>10</y>
-      <width>101</width>
-      <height>21</height>
+      <width>321</width>
+      <height>31</height>
      </rect>
     </property>
-    <property name="text">
-     <string>username</string>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
     </property>
-   </widget>
-   <widget class="QLabel" name="label_4">
-    <property name="geometry">
-     <rect>
-      <x>460</x>
-      <y>10</y>
-      <width>101</width>
-      <height>21</height>
-     </rect>
+    <property name="editable">
+     <bool>false</bool>
     </property>
-    <property name="text">
-     <string>password</string>
+    <property name="currentText">
+     <string notr="true"/>
+    </property>
+    <property name="duplicatesEnabled">
+     <bool>false</bool>
     </property>
    </widget>
   </widget>

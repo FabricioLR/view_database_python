@@ -3,11 +3,14 @@ from PyQt5.QtWidgets import *
 import sys
 import psycopg2
 
+file = open("urls.txt", "a+")
+
 class Ui(QMainWindow):
     def __init__(self):
         super(Ui, self).__init__()
         uic.loadUi("desing/app.ui", self)
         self.tables = []
+        self.lines = []
         self.columnsNames = {}
         self.tablesData = {}
         self.currentTable = ""
@@ -19,17 +22,17 @@ class Ui(QMainWindow):
         self.tableWidget = self.findChild(QTableWidget, "tableWidget")
         self.buttonWidget = self.findChild(QPushButton, "connect")
         self.boxWidget = self.findChild(QComboBox, "tableName")
+        self.urlsWidget = self.findChild(QComboBox, "urls")
 
-        self.databaseWidget = self.findChild(QLineEdit, "database")
-        self.usernameWidget = self.findChild(QLineEdit, "username")
-        self.hostWidget = self.findChild(QLineEdit, "host")
-        self.passwordWidget = self.findChild(QLineEdit, "password")
+        self.urlWidget = self.findChild(QLineEdit, "url")
 
         self.messageBox = QMessageBox()
 
     def setEvents(self):
+        self.setUrls()
         self.buttonWidget.clicked.connect(self.conn)
         self.boxWidget.activated.connect(self.setComboBox)
+        self.urlsWidget.activated.connect(self.setUrl)
 
     def setComboBox(self, table):
         try:
@@ -41,6 +44,22 @@ class Ui(QMainWindow):
         except Exception as error:
             self.messageBox.about(self, "Error", str(error))
 
+    def setUrls(self):
+        try:
+            file.seek(0)
+            self.lines = file.readlines()
+            for index, line in enumerate(self.lines):
+                self.lines[index] = line[:len(line) - 1]
+            self.urlWidget.setText(self.lines[0])
+            self.urlsWidget.clear()
+            self.urlsWidget.addItems(self.lines)
+            self.urlsWidget.setCurrentIndex(self.lines[0])
+        except Exception as error:
+            print(error)
+
+    def setUrl(self, url):
+        print(self.lines[url - 1])
+        self.urlWidget.setText(self.lines[url - 1])
 
     def setData(self):
         if (self.currentTable != ""):
@@ -60,17 +79,13 @@ class Ui(QMainWindow):
         self.tableWidget.setRowCount(0)
         self.boxWidget.clear()
 
-        database = self.databaseWidget.text()
-        host = self.hostWidget.text()
-        username = self.usernameWidget.text()
-        password = self.passwordWidget.text()
+        url = self.urlWidget.text()
 
-        """ if (database == "" and host == "" and username == "" and password == ""):
-            database = ""
-            host = ""
-            username = ""
-            password = ""
-        """
+        host = url[url.find("@") + 1:url.index("/", url.find("@"))]
+        database = url[url.index("/", url.find("@")) + 1:]
+        username = url[url.find("//") + 2:url.index(":", url.find("//"))]
+        password = url[url.index(":", url.find("//")) + 1:url.find("@")]
+
         try:
             conn = psycopg2.connect(host=host, database=database, user=username, password=password)
             cur = conn.cursor()
@@ -101,9 +116,10 @@ class Ui(QMainWindow):
 
             conn.close()
 
-            print(self.tables, self.columnsNames)
-
             self.setComboBox(0)
+
+            file.write(url + "\n")
+            self.setUrls()
         except Exception as error:
             self.messageBox.about(self, "Error", str(error))
 
@@ -113,3 +129,5 @@ def window():
     sys.exit(app.exec_())
 
 window()
+
+file.close()
